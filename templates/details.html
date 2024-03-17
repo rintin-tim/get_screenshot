@@ -1,0 +1,594 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+      <link rel="shortcut icon" href="static/favicon.ico">
+    <title>Confirmation</title>
+    <style>
+    /* -------------------------------------
+        INLINED WITH htmlemail.io/inline
+    ------------------------------------- */
+    /* -------------------------------------
+        RESPONSIVE AND MOBILE FRIENDLY STYLES
+    ------------------------------------- */
+    @media only screen and (max-width: 620px) {
+      table[class=body] h1 {
+        font-size: 28px !important;
+        margin-bottom: 10px !important;
+      }
+      table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+        font-size: 16px !important;
+      }
+      table[class=body] .wrapper,
+            table[class=body] .article {
+        padding: 10px !important;
+      }
+      table[class=body] .content {
+        padding: 0 !important;
+      }
+      table[class=body] .container {
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      table[class=body] .main {
+        border-left-width: 0 !important;
+        border-radius: 0 !important;
+        border-right-width: 0 !important;
+      }
+      table[class=body] .btn table {
+        width: 100% !important;
+      }
+      table[class=body] .btn a {
+        width: 100% !important;
+      }
+      table[class=body] .img-responsive {
+        height: auto !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
+    }
+
+    /* -------------------------------------
+        PRESERVE THESE STYLES IN THE HEAD
+    ------------------------------------- */
+    @media all {
+      .ExternalClass {
+        width: 100%;
+      }
+      .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+        line-height: 100%;
+      }
+      .apple-link a {
+        color: inherit !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        text-decoration: none !important;
+      }
+      .btn-primary table td:hover {
+        background-color: #34495e !important;
+      }
+      .btn-primary a:hover {
+        background-color: #34495e !important;
+        border-color: #34495e !important;
+      }
+    }
+    </style>
+
+    <!-- jquery modal styling -->
+    <style>
+  .modal {
+  max-width: 100% !important;
+  //max-width: auto !important;
+  width: auto !important;
+
+  }
+
+  .modal img {
+  max-width: 100%;
+  width: auto;
+  display: block;
+  }
+
+  a.previous, a.next  {
+  font-size: 23px;
+  opacity: 0.7;
+  text-decoration: none;
+  }
+
+  .previous {
+  background-color: #d0cfcf;
+  color: black;
+  left: 20px;
+  right: auto;
+  position: fixed;
+  top: 250px;
+  padding: 10px
+
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+  left: auto;
+  right: 20px;
+  position: fixed;
+  top: 250px;
+  padding: 10px
+}
+
+#overview {
+      position: fixed;
+      padding: 10px;
+      color: white;
+      background-color: #e91e63;
+      opacity: 0.8;
+      max-width: 350px;
+      margin-top: 100px;
+      left: 20px;
+}
+
+#overview #testurl {
+    word-break: break-all;
+}
+
+a#resulturl {
+  color: #ffeb3b;
+}
+
+
+
+#status.complete {
+    background-color: #67f167;
+}
+
+#status.incomplete {
+    background-color: #ffc165;
+}
+
+#lg-spinner {
+    font-size: 60px;
+    color: #e69500;
+    padding: 15px
+}
+
+#sml-spinner {
+    font-size: 16px;
+    color: #e69500;
+    margin-left: 15px
+}
+
+
+#sml-tick {
+    font-size: 16px;
+    color: green;
+    margin-left: 10px
+}
+
+#lg-tick {
+    font-size: 60px;
+    color: green;
+    padding: 15px
+}
+
+#lgstatus {
+    font-size: 18px;
+}
+
+table#summary, table#summary td {
+    border: 1px solid #c6c6c6;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+table#summary {
+    margin-bottom: 30px;
+}
+
+a.button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-decoration: none;
+
+}
+
+div.img-container {
+    padding-bottom: 20px;
+}
+
+/* table scroll */
+div.table-wrapper {
+    overflow: scroll;
+    width: 90vw;
+
+}
+
+  </style>
+
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+      <script src="https://kit.fontawesome.com/9dc40bb747.js"></script>
+
+
+      <!--      SLICK NAV JS AND CSS Starts-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+<style>
+
+a[role='menuitem'] { color: black; text-align: center }
+.slicknav_menu { background: #D2D2D2; }
+.slicknav_menu li { border-top: solid 1px; }
+.slicknav_menu li:last-child { border-bottom: solid 1px;}
+
+</style>
+
+<script>
+	$(function(){
+		$('#menu').slicknav();
+	});
+</script>
+
+<!--      Slick Nav Ends-->
+
+
+<!--    Logo in nav -->
+    <style>
+        a#logo:after {
+            content: "📸 Get Screenshot 📸";
+            position:absolute;
+            font-family: sans-serif;
+            font-size:25px;
+            font-weight: 500;
+            color: #000000;
+            padding-left:20px;
+            top: 8px;
+            letter-spacing: -1px;
+        }
+    </style>
+<!--    End logo in nav-->
+
+
+
+    <script>
+  $(document).ready(function() {
+
+    console.log('page loaded - whats the problem?')
+
+    // open modal
+    $("a.screenshot").click(function(e) {
+        newUrl = e.target.dataset.modalSrc;
+        console.log(e.target.dataset.modalSrc);
+        window.modalImg = $('#modurl').attr('src', newUrl)[0]; // set the image url in the modal
+        createSrcList();
+
+        function createSrcList() {
+            var imgs = $('img[data-screenshot]');
+            var i;
+
+            window.srcs = [];
+            for (i = 0; i < imgs.length; i++) {
+                //srcs.push(imgs[i].href);
+                srcs.push(imgs[i].dataset.modalSrc);
+            };
+
+            console.log(srcs);
+            console.log(e)
+
+        };
+
+        populateOverview();
+        $.modal.defaults.clickClose = false;  // don't close modal when clicking off image
+        showHideNextPrevious();
+
+    }) // end of modal open onClick
+
+    window.refreshPending // create refreshPending global variable
+    $('#ex1').on($.modal.CLOSE, function(event, modal) {
+        if (window.refreshPending) {
+            refreshPage();
+        }
+    });
+
+
+
+        function populateOverview() {
+            // use modal src to match data attributes in thumb/result img tag
+
+            console.log('populate executed')
+
+            thumbImage = $('img[data-modal-src="' + window.modalImg.src + '"]')[0]
+            //currentImage = $('img[data-modal-src=modalImg.src]')[0]
+            console.log('thumb image: ' + thumbImage)
+
+            platform = (thumbImage.dataset.modalPlatform) ? thumbImage.dataset.modalPlatform : 'N/A'
+            os = (thumbImage.dataset.modalOs) ? thumbImage.dataset.modalOs : 'N/A'
+            testUrl = (thumbImage.dataset.modalTesturl) ? thumbImage.dataset.modalTesturl: 'N/A'
+            resultUrl = (thumbImage.dataset.modalBsUrl) ? thumbImage.dataset.modalBsUrl: 'N/A'
+
+            $('#platform').text(platform); // set the plaform in the modal
+            $('#os').text(os); // set the os in the modal
+            $('#testurl').text(testUrl); // set the testURL in the modal
+            //$('#resulturl').text(resultUrl); // set the resultUrl in the modal
+            $('a#resulturl').attr('href', resultUrl)[0]; // set the href for resultUrl in the modal
+
+
+            console.log(platform + " | " + os + " | " + testUrl)
+
+        }
+
+        // load specific image from email id
+
+        function openImageFromEmail() {
+            console.log('opening image from param: ' + document.location.search)
+            let params = new URLSearchParams(document.location.search);
+            let imageId = params.get("image_id");
+            if (imageId) {
+                let imageElement = document.getElementById(imageId);
+                if (imageElement) {
+                    window.deleteQueryString = true
+                    console.log('clicking element via param')
+                    imageElement.click();
+                } else {console.log('found image id query string but no corresponding element')}
+            } else { console.log('no image id query string')}
+
+
+        }
+
+
+        function showHideNextPrevious() {
+            let currentUrl = $('#modurl').attr('src'); // get current image url
+            console.log('current url: ' + currentUrl)
+
+            let imageIndex = srcs.indexOf(currentUrl);
+
+            // next
+            if (imageIndex + 1 >= srcs.length) {
+                //console.log('disable next')
+                $('a#next').hide();
+            } else {
+                // console.log('enable next')
+                $('a#next').show();
+            }
+
+            // previous
+            if (imageIndex < 1) {
+                // previous
+                // console.log('disable previous')
+                $('a#previous').hide();
+            } else {
+                // console.log('enable previous')
+                $('a#previous').show();
+            }
+
+            let nextIndex = srcs.indexOf(currentUrl) + 1;
+
+        }
+
+
+        window.refreshInterval  // TODO - is this needed?
+        function setRefreshPageInterval() {
+
+            if (!window.refreshInterval) {
+                window.refreshInterval = setInterval(decideRefresh, 15000);
+            }
+
+        }
+
+        function decideRefresh() {
+
+            complete = $('#lg-tick')
+            console.log('complete? ' + complete)
+            //debugger;
+            if (complete.length == 1) {
+                console.log('page complete - clear interval')
+                console.log('before: ' + window.refreshInterval)
+                clearInterval(window.refreshInterval)
+                console.log('after: ' + window.refreshInterval)
+
+            }
+            else {
+                if (!$.modal.isActive()) {
+                    console.log('modal not active refreshing page')
+                   refreshPage();
+                } else {
+                    console.log('modal active - refresh pending')
+                    window.refreshPending = true;
+                }
+            }
+        }
+
+        function refreshPage (){
+            console.log('hitting page refresh function')
+            // TODO if clearParam == true {// use strip query string and refresh document.location.href = "/", then set to false, else location.reload }
+            if (window.deleteQueryString) {
+                document.location.href = "/"
+                console.log('window.deleteQueryString: ' + window.deleteQueryString)
+                window.deleteQueryString = false
+            } else {
+            location.reload()
+            //window.location.href = window.location;
+            console.log('interval straight after reload: ' + window.refreshInterval)
+            }
+
+        }
+
+
+    // click next/previous
+    $('a#next, a#previous').click(function(e) {
+
+            console.log('click event fired')
+            targetId = e.target.id
+            console.log('target id: ' + targetId)
+
+            getNextPrevUrl(targetId)
+
+            function getNextPrevUrl(targetId) {
+                currentUrl = $('#modurl').attr('src'); // get current image url
+                console.log('current url: ' + currentUrl)
+
+                if (targetId == 'previous') {
+                    urlIndex = srcs.indexOf(currentUrl) - 1;
+                    console.log('previous index: ' + urlIndex)
+                } else if (targetId == 'next') {
+                    urlIndex = srcs.indexOf(currentUrl) + 1;
+                    console.log('next index: ' + urlIndex)
+                } else {
+                    throw "target id not found"
+                }
+
+                nextPrevUrl = srcs[urlIndex]  // get next url from identified index
+                console.log('next / prev: ' + nextPrevUrl);
+                $('#modurl').attr('src', nextPrevUrl); // apply next url to image src
+                $('div.jquery-modal.blocker.current').scrollTop(0);  // scroll back to top of modal
+            }
+
+             populateOverview();
+             showHideNextPrevious();
+        }
+
+    )
+
+       openImageFromEmail();  // Open modal if image_id found in query string
+
+       // setRefreshPageInterval();
+
+}) // end of docReady
+    </script>
+
+
+
+  </head>
+  <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+   <a id="logo" href="/"></a>
+    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+      <tr>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+        <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; padding: 10px; max-width: 900px;">
+          <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; padding: 10px;">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">This is preheader text. Some clients will show this text as a preview.</span>
+            <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #ffffff; border-radius: 3px; width: 100%">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                    <tr>
+                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">
+<!--                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there None</p>-->
+
+<!--                          {% set details_button %}-->
+<!--                           <a href="/details/{{ timestampid }}" class="button">View Job Details</a>-->
+<!--                          {% endset %}-->
+
+                           {% if status == "busy" %}
+                          <h3>I'm busy at the moment.... But your request has been submitted.</h3>
+                          <div class="img-container">
+                              <img src="/static/waiting_ij.gif" width="60%">
+                          </div>
+<!--                          {{ details_button }}-->
+                          {% elif status == "ok" %}
+                          <h3>Your screenshots are underway!</h3>
+                          <div class="img-container">
+                              <img src="/static/processing.gif" width="60%">
+                          </div>
+<!--                          {{ details_button }}-->
+                          {% endif %}
+
+                          {% set results_button %}
+                           <a href="/results/{{ timestampid }}" class="button">View Screenshots</a>
+                          {% endset %}
+
+<!--                          <a href="/all" class="button">View/Manage Jobs</a>-->
+
+                        <h3>Job details: {{ timestampid }} </h3>
+
+                              <h4>Browsers:</h4>
+                                      <ol>
+                                  {% for browser in browsers %}
+                                    {% if browser["device"] %}
+                                    <li>{{ browser.device }} / {{ browser.browser }} / {{ browser.os }} ({{ browser.os_version }}) </li>
+                                    {% else %}
+                                    <li> {{ browser.browser }} ({{ browser.browser_version }}) / {{ browser.os }} ({{ browser.os_version }})  </li>
+                                    {% endif %}
+                                  {% endfor %}
+                                      </ol>
+                              <h4>Resolutions: </h4>
+                                  <ul>
+                                      <li>Windows: {{ win_res }}</li>
+                                      <li>Mac: {{ mac_res }}</li>
+                                  </ul>
+                              <h4>Wait time:</h4>
+                          <ul>
+                              <li>Seconds: {{ wait_time}}</li>
+                          </ul>
+
+                              <h3>URLs: </h3>
+                            {{ results_button }}
+                          <br /><br />
+                          <div class="table-wrapper">
+                              <table id="summary">
+                                  {% for url in url_statuses %}
+                                  <tr>
+                                      <td>{{ loop.index }}</td>
+                                      <td>{{ url[0] }}</td>
+                                      <td>{{ url[1] }}</a></td>
+                                      <td>{% if url[2] %}
+                                          <a href="{{ url[2]}}" target="_blank">Browserstack</a>
+                                          {% endif %}
+                                      </td>
+                                  </tr>
+                                  {% endfor %}
+                              </table>
+                           </div>
+
+
+<!--                          {{ results_button }}-->
+
+<!--                          {% if status == "details" %}-->
+<!--                              {{ results_button }}-->
+<!--                          {% endif %}-->
+
+
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+
+<!--  SLICK NAV MENU CONTENT-->
+  <div style="display:none">
+<ul id="menu">
+    <li><a href="/">New Job</a></li>
+	<li><a href="/all">All Jobs</a></li>
+	<li><a href="/queue">Queue Management</a></li>
+</ul>
+      </div>
+<!-- SLICK NAV MENU ENDS -->
+
+</html>

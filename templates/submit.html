@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" href="static/favicon.ico">
+
+    <meta charset="UTF-8">
+    <title>Get Screenshot</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/de089429e0.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        // ensure at least one broswer is selected
+        // https://stackoverflow.com/questions/22238368/multiple-checkboxes-at-least-1-required
+        $(document).ready(function () {
+            $('#singlebutton').click(function() {
+              checked = $("label.browser-group input[type=checkbox]:checked").length;
+              if(!checked) {
+                alert("Please select at least one browser.");
+                return false;
+              }
+
+            });
+            $('#singlebutton').click(function(event) {
+                if(!event.detail || event.detail == 1){
+                    return true;
+                } else {
+                    console.log('stop double click');
+                    return false;
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+                <!--      SLICK NAV JS AND CSS Starts-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+<style>
+
+a[role='menuitem'] { color: black; text-align: center }
+.slicknav_menu { background: #D2D2D2; }
+.slicknav_menu li { border-top: solid 1px; }
+.slicknav_menu li:last-child { border-bottom: solid 1px;}
+
+</style>
+
+<script>
+	$(function(){
+		$('#menu').slicknav();
+	});
+</script>
+
+<!--      Slick Nav Ends-->
+
+<!--    Logo in nav -->
+    <style>
+        a#logo:after {
+            content: "📸 Get Screenshot 📸";
+            position:absolute;
+            font-family: sans-serif;
+            font-size:25px;
+            font-weight: 500;
+            color: #000000;
+            padding-left:20px;
+            top: 8px;
+            letter-spacing: -1px;
+        }
+    </style>
+<!--    End logo in nav-->
+
+
+    <style>
+        span.viewport {
+            font-size: 14px;
+            color: red;
+            padding-left: 40px;
+        }
+
+    </style>
+
+    <style>
+        <!-- Spinner functionality adapted from https: //stackoverflow.com/a/1964871/8880478 -->
+        /* Start by setting display:none to make this hidden.
+      Then we position it in relation to the viewport window
+      with position:fixed. Width, height, top and left speak
+      for themselves. Background we set to 80% white with
+      our animation centered, and no-repeating */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba( 255, 255, 255, .8)
+            /* url('/static/eclipse-1s-200px.gif') */
+            url('{{ url_for('static', filename='eclipse-1s-200px.gif') }}')
+            /* url('eclipse-1s-200px.gif') */
+            50% 50% no-repeat;
+        }
+        /* When the body has the loading class, we turn
+          the scrollbar off with overflow:hidden */
+
+        body.loading .modal {
+            overflow: hidden;
+        }
+        /* Anytime the body has the loading class, our
+          modal element will be visible */
+
+        body.loading .modal {
+            display: block;
+        }
+
+        .g-user {
+            border-left: 5px solid ref <!--border-style: solid--> <!--border-color: red;
+            --> font-weight: bold font-style: italic
+        }
+
+        ::-webkit-input-placeholder {
+            font-size: 13px;
+        }
+
+        ::-moz-placeholder {
+            font-size: 13px;
+        }
+
+        :-ms-input-placeholder {
+            font-size: 13px;
+        }
+
+        .advanced {
+            display: none
+        }
+
+        div.advanced {
+            background-colour: red
+        }
+
+        .advanced-click {
+            font-size: 13px;
+        }
+
+        body {
+            background-color: #f7fcfd !important
+        }
+
+        div.form-click-container {
+            display: none;
+        }
+
+        .lead {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        label.checkbox-inline {
+            text-indent: -1em;
+            margin-left: 20px;
+        }
+
+        label.disabled {
+            color: grey;
+            font-weight: lighter;
+        }
+
+        span[title] {
+            border-bottom: 1px dotted #a5a2a2;
+        }
+
+        .camera-right {
+            padding-left: 20px;
+
+        }
+
+        .camera-left {
+            padding-right: 20px;
+
+        }
+
+        .device-title {
+            padding-left: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+
+    </style>
+</head>
+<!--<body class="loading">-->
+
+<body id="body">
+    <a id="logo"></a>
+    <!--$:not(".form-update").hide()-->
+    <main role="main" class="container">
+        <div class="show-form">
+            <h1 class="mt-5 form-update">Screenshot Checker</h1>
+
+            <!--<form class="pure-form pure-form-aligned" action="https://damp-cove-31285.herokuapp.com/form" method="POST" target="">-->
+            <!--<form class="pure-form pure-form-aligned" id="checkerform" name="checkerform" action="http://127.0.0.1:5000/form" target="" method="POST">-->
+            <form class="pure-form pure-form-aligned form-update" id="screenshotsubmit" name="screenshotsubmit" action="/submit" onsubmit="singlebutton.disabled = true;" method="POST">
+                <fieldset>
+
+                          <p class="lead non-update">Enter your website URLs below*</p>
+                    <!-- Text input-->
+                    <div class="form-group non-update">
+                        <!--<label class="  control-label" for="websitelist">Initial List of Websites</label>-->
+                        <div class="">
+                            <textarea id="websitelist" rows=4 name="websitelist" class="form-control" placeholder="Separate URLs by new line, space ('url1 url2') or comma & space ('url1, url2')" required></textarea>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+
+<!--                         <p class="lead non-update">Desktop</p>-->
+<!--                    <i class="fas fa-tablet-alt"></i>-->
+
+
+<!--                <div style="padding-top: 10px; padding-bottom: 20px;"><img style="height: 100px" src="/static/tablet-alt-solid.svg"></div>-->
+                <div style="padding-top: 40px; padding-bottom: 20px;"><img style="height: 60px" src="/static/desktop-solid.svg"><span class="device-title">Desktop</span></div>
+                        <div class="form-row">
+
+                             <p class="col-md-2 subtitle"><img style="height: 50px; padding-right:10px;" src="/static/256px-Windows_logo_-_2012.svg.png">Win 10</p>
+
+                            <!-- Multiple Checkboxes (inline) -->
+
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_win_10_chrome">
+                  <input type="checkbox" name="combi_win_10_chrome" id="combi_win_10_chrome" value="1">
+                    <img src="/static/chrome_logo_PNG16.png" style="height: 35px; padding-right: 5px;">Chrome
+
+
+                </label>
+
+                            <!--FF bug - doesn't work in Browserstack-->
+<!--                <label class="checkbox-inline col-md-2 browser-group disabled" for="win_10_ff">-->
+<!--                   <input type="checkbox" name="win_10_ff" id="win_10_ff" value="1" disabled>-->
+<!--                     <img src="/static/firefox_PNG48.png" style="height: 35px; padding-right: 5px;">Firefox (disabled)-->
+
+<!--                </label>-->
+
+                 <label class="checkbox-inline col-md-2 browser-group" for="combi_win_10_edge">
+                    <input type="checkbox" name="combi_win_10_edge" id="combi_win_10_edge" value="1">
+                     <img src="/static/microsoft-edge-logo-png-transparent.png" style="height: 35px; padding-right: 5px;">Edge
+
+                </label>
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_win_10_ie11">
+                  <input type="checkbox" name="combi_win_10_ie11" id="combi_win_10_ie11" value="1">
+                      <img src="/static/ie_logo_PNG17.png" style="height: 35px; padding-right: 5px;">IE 11
+
+                </label>
+
+              </div>
+
+
+                        <div class="form-row">
+                            <p class="col-md-2 subtitle"><img style="height: 50px; padding-right:10px;" src="/static/apple_logo_PNG19668.png">OS X</p>
+<!--                            <img style="height: 50px; padding-right:10px;" src="/static/256px-Windows_logo_-_2012.svg.png"<p class="col-md-2 subtitle">OSX</p>-->
+
+                            <!-- Multiple Checkboxes (inline) -->
+
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_catalina_chrome">
+                  <input type="checkbox" name="combi_catalina_chrome" id="combi_catalina_chrome" value="1">
+                    <img src="/static/chrome_logo_PNG16.png" style="height: 35px; padding-right: 5px;"><span title="OS X Catalina">Chrome</span>
+                </label>
+
+                            <!--FF bug - doesn't work in Browserstack-->
+<!--                <label class="checkbox-inline col-md-2 browser-group disabled" for="mojave_ff">-->
+<!--                   <input type="checkbox" name="mojave_ff" id="mojave_ff" value="1" disabled>-->
+<!--                     <img src§="/static/firefox_PNG48.png" style="height: 35px; padding-right: 5px;">Firefox (Mojave) (disabled)-->
+
+<!--                </label>-->
+
+
+<!--                <label class="checkbox-inline col-md-2 browser-group disabled" for="mojave_safari">-->
+<!--                  <input type="checkbox" name="mojave_safari" id="mojave_safari" value="1" disabled>-->
+<!--                      <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;">Safari 12.0 (disabled)-->
+
+<!--                </label>-->
+
+                            <label class="checkbox-inline col-md-2 browser-group" for="combi_catalina_safari">
+                  <input type="checkbox" name="combi_catalina_safari" id="combi_catalina_safari" value="1">
+                                <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="OS X Catalina">Safari</span>
+                </label>
+
+
+              </div>
+
+
+
+<div style="padding-top: 40px; padding-bottom: 20px;"><img style="height: 60px" src="/static/tablet-alt-solid.svg"><span class="device-title">Tablet</span></div>
+
+<!--                    <p class="lead non-update">Tablet</p>-->
+<!--                <p class="subtitle">iOS 12</p>-->
+                        <div class="form-row">
+                               <p class="col-md-2 subtitle"><img style="height: 50px; padding-right:10px;" src="/static/apple_logo_PNG19668.png">iOS</p>
+
+                            <!-- Multiple Checkboxes (inline) -->
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_11_ipad_6th">
+                  <input type="checkbox" name="combi_ios_11_ipad_6th" id="combi_ios_11_ipad_6th" value="1">
+                    <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 11">9.7" 6th Gen</span><br /><span class="viewport">(768 x 1024 px)</span>
+
+                </label>
+
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_12_ipad_11">
+                  <input type="checkbox" name="combi_ios_12_ipad_11" id="combi_ios_12_ipad_11" value="1">
+                    <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 12">11" Pro</span><br /><span class="viewport">(834 x 1112 px)</span>
+
+
+                </label>
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_12_ipad_12">
+                   <input type="checkbox" name="combi_ios_12_ipad_12" id="combi_ios_12_ipad_12" value="1">
+                    <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 12">12.9" Pro</span><br /><span class="viewport">(1024 x 1366 px)</span>
+
+                </label>
+
+              </div>
+
+<!--                       <p class="lead non-update">Mobile</p>-->
+                    <div style="padding-top: 40px; padding-bottom: 20px;"><img style="height: 60px" src="/static/mobile-alt-solid.svg"><span class="device-title">Mobile</span></div>
+<!--                <p class="subtitle">iOS 12</p>-->
+                        <div class="form-row">
+                               <p class="col-md-2 subtitle"><img style="height: 50px; padding-right:10px;" src="/static/apple_logo_PNG19668.png">iOS</p>
+
+                            <!-- Multiple Checkboxes (inline) -->
+                 <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_11_iphone_se">
+                  <input type="checkbox" name="combi_ios_11_iphone_se" id="combi_ios_11_iphone_se" value="1">
+                     <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 11">iPhone SE</span><br /><span class="viewport">(320 x 568 px)</span>
+
+
+                </label>
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_12_iphone_8">
+                  <input type="checkbox" name="combi_ios_12_iphone_8" id="combi_ios_12_iphone_8" value="1">
+                    <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 12">iPhone 8</span><br /><span class="viewport">(375 x 667 px)</span>
+
+
+                </label>
+
+                            <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_12_iphone_xs">
+                   <input type="checkbox" name="combi_ios_12_iphone_xs" id="combi_ios_12_iphone_xs" value="1">
+                    <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 12">iPhone XS</span><br /><span class="viewport">(375 x 812 px)</span>
+
+                </label>
+
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_ios_12_iphone_xr">
+                   <input type="checkbox" name="combi_ios_12_iphone_xr" id="combi_ios_12_iphone_xr" value="1">
+                    <img src="/static/safari_PNG27.png" style="height: 35px; padding-right: 5px;"><span title="iOS 12">iPhone XR</span><br /><span class="viewport">(414 x 896 px)</span>
+
+                </label>
+
+                        </div>
+
+                                   <div class="form-row">
+                               <p class="col-md-2 subtitle"><img style="height: 50px; padding-right:10px;" src="/static/android_logo_PNG17.png">Android</p>
+
+
+                            <!-- Multiple Checkboxes (inline) -->
+
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_galaxy_s9">
+                  <input type="checkbox" name="combi_galaxy_s9" id="combi_galaxy_s9" value="1">
+                    <img src="/static/chrome_logo_PNG16.png" style="height: 35px; padding-right: 5px;"><span title="Android 8">Galaxy S9</span><br /><span class="viewport">(360 x 740 px)</span>
+
+
+                </label>
+                <label class="checkbox-inline col-md-2 browser-group" for="combi_galaxy_s10">
+                   <input type="checkbox" name="combi_galaxy_s10" id="combi_galaxy_s10" value="1">
+                    <img src="/static/chrome_logo_PNG16.png" style="height: 35px; padding-right: 5px;"> <span title="Android 9">Galaxy S10</span><br /><span class="viewport">(360 x 760 px)</span>
+
+                </label>
+
+                                   </div>
+
+                             <p class="lead non-update" style="padding-top: 30px;">Browser Config</p>
+
+                    <!-- start of row -->
+
+                    <div class="non-update">
+
+                        <div class="form-row">
+
+                            <!-- Email input 1-->
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="winres">Windows Resolution</label>
+                                <div class="">
+                                    <select class="select form-control" id="winres" name="winres">
+                                    <option value="1024x768">1024x768</option>
+                                    <option value="1280x800" selected>1280x800</option>
+                                    <option value="1280x1024">1280x1024</option>
+                                    <option value="1366x768">1366x768</option>
+                                    <option value="1440x900">1440x900</option>
+                                    <option value="1600x1200">1600x1200</option>
+                                    <option value="1680x1050">1680x1050</option>
+                                    <option value="1920x1080">1920x1080</option>
+                                    <option value="1920x1200">1920x1200</option>
+                                    <option value="2048x1536">2048x1536</option>
+                                </select>
+                                </div>
+                            </div>
+
+                            <!-- Select input-->
+                            <div class="form-group col-md-4">
+                                <label class="control-label " for="macres">Mac Resolution</label>
+                                <select class="select form-control" id="macres" name="macres">
+                                    <option value="1024x768">1024x768</option>
+                                    <option value="1280x960" selected>1280x960</option>
+                                    <option value="1280x1024">1280x1024</option>
+                                    <option value="1600x1200">1600x1200</option>
+                                    <option value="1920x1080">1920x1080</option>
+                                </select>
+                            </div>
+
+                              <!-- Select input-->
+                            <div class="form-group col-md-4">
+                                <label class="control-label " for="orientation">Device Orientation</label>
+                                <select class="select form-control" id="orientation" name="orientation">
+                                    <option value="portrait" selected>Portrait</option>
+                                    <option value="landscape">Landscape</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <!-- end of row -->
+
+
+     <p class="lead non-update">System Config</p>
+
+                    <!-- start of row -->
+
+                    <div class="non-update">
+
+                        <div class="form-row">
+
+                            <!-- Select input-->
+                            <div class="form-group col-md-4">
+                                <label class="control-label " for="waittime"><span title="Wait on page before taking screenshot">Wait Time</span></label>
+                                <select class="select form-control" id="waittime" name="waittime">
+                                    <option value=""></option>
+                                    <option value="2">2 seconds</option>
+                                    <option value="5">5 seconds</option>
+                                    <option value="10" selected>10 seconds</option>
+                                    <option value="15">15 seconds</option>
+                                    <option value="20">20 seconds</option>
+                                    <option value="60">60 seconds</option>
+                                </select>
+                            </div>
+
+
+                            <!-- Select input-->
+                            <div class="form-group col-md-4">
+                                <label class="control-label " for="imagequality">Image Quality</label>
+                                <select class="select form-control" id="imagequality" name="imagequality">
+                                    <option value=""></option>
+                                    <option value="compressed" selected>Compressed</option>
+                                    <option value="original" disabled>Original (not used)</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <!-- end of row -->
+
+
+
+
+<!--                <p class="lead non-update">Text for something</p>-->
+<!--                    <div class="form-group">-->
+<!-- -->
+<!--                <div class="form-update">-->
+<!--                    <input id="sheeturl" name="sheeturl" type="text" placeholder="For example https://docs.google.com/spreadsheets/d/1Y-wR6KjmbQR6OXVz1M7iTfnyP6RzcGc_ZMLj1ypTNUs"-->
+<!--                           class="form-control input-md" required="">-->
+<!--                    <span class="help-block"><em><u></u></em></span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+
+                    <p class="lead non-update">Notification email address</p>
+
+                    <!-- start of row -->
+
+
+
+                        <div class="form-row">
+
+                            <!-- Email input 1-->
+                            <div class="form-group col-md-4">
+                                <label class="  control-label" for="emailaddress0">Email Address</label>
+                                <div class="">
+                                    <input id="emailaddress0" name="emailaddress0" type="email" placeholder="example@example.com" class="form-control input-md">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <!-- Email input 1-->
+                            <div style="display: none;" class="form-group col-md-4">
+                                <label class="  control-label" for="emailaddress1">Email Address</label>
+                                <div class="">
+                                    <input id="emailaddress1" name="emailaddress1" type="email" placeholder="example@example.com" class="form-control input-md">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <!-- Email input 1-->
+                            <div style="display: none;" class="form-group col-md-4">
+                                <label class="  control-label" for="emailaddress2">Email Address</label>
+                                <div class="">
+                                    <input id="emailaddress2" name="emailaddress2" type="email" placeholder="example@example.com" class="form-control input-md">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                        <!-- end of row -->
+
+
+                    </div>
+<!--                    <div class="form-update">-->
+<!--                        <p><a id="advanced-click" href="#" class="advanced-click">Open advanced settings</a></p>-->
+<!--                    </div>-->
+
+                    <!-- Button -->
+                    <div class="form-group form-update">
+                        <!--<label class="  control-label" for="singlebutton">Off We Go!</label>-->
+                        <div class="">
+                            <!--<input id="submit" type="submit" name="submit" value="Off We Go" onclick="loading();">-->
+                            <!--<button onclick="loading()" id="singlebutton" name="singlebutton" class="btn btn-primary">Off We Go!</button>-->
+                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">Get Screenshots</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+            </form>
+        </div>
+
+    </main>
+
+    <div class="modal">
+        <!-- Loading overlay -->
+    </div>
+
+</body>
+
+
+<!--  SLICK NAV MENU CONTENT-->
+  <div style="display:none">
+<ul id="menu">
+	<li><a href="/all">All Jobs</a></li>
+	<li><a href="/queue">Queue Management</a></li>
+</ul>
+      </div>
+<!-- SLICK NAV MENU ENDS -->
+
+
+</html>
+

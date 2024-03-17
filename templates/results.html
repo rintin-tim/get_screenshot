@@ -1,0 +1,958 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <link rel="shortcut icon" href="https://getscreenshot.herokuapp.com/static/favicon.ico">
+
+    <title>Screenshots</title>
+    <style>
+    /* -------------------------------------
+        INLINED WITH htmlemail.io/inline
+    ------------------------------------- */
+    /* -------------------------------------
+        RESPONSIVE AND MOBILE FRIENDLY STYLES
+    ------------------------------------- */
+    @media only screen and (max-width: 620px) {
+      table[class=body] h1 {
+        font-size: 28px !important;
+        margin-bottom: 10px !important;
+      }
+      table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+        font-size: 16px !important;
+      }
+      table[class=body] .wrapper,
+            table[class=body] .article {
+        padding: 10px !important;
+      }
+      table[class=body] .content {
+        padding: 0 !important;
+      }
+      table[class=body] .container {
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      table[class=body] .main {
+        border-left-width: 0 !important;
+        border-radius: 0 !important;
+        border-right-width: 0 !important;
+      }
+      table[class=body] .btn table {
+        width: 100% !important;
+      }
+      table[class=body] .btn a {
+        width: 100% !important;
+      }
+      table[class=body] .img-responsive {
+        height: auto !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
+    }
+
+    /* -------------------------------------
+        PRESERVE THESE STYLES IN THE HEAD
+    ------------------------------------- */
+    @media all {
+      .ExternalClass {
+        width: 100%;
+      }
+      .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+        line-height: 100%;
+      }
+      .apple-link a {
+        color: inherit !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+        text-decoration: none !important;
+      }
+      .btn-primary table td:hover {
+        background-color: #34495e !important;
+      }
+      .btn-primary a:hover {
+        background-color: #34495e !important;
+        border-color: #34495e !important;
+      }
+    }
+    </style>
+
+    <!-- jquery modal styling -->
+    <style>
+  .modal {
+  max-width: 100% !important;
+  //max-width: auto !important;
+  width: auto !important;
+
+  }
+
+  .modal img {
+  max-width: 100%;
+  width: auto;
+  display: block;
+  }
+
+  a.previous, a.next  {
+  font-size: 23px;
+  opacity: 0.7;
+  text-decoration: none;
+  }
+
+  .previous {
+  background-color: #d0cfcf;
+  color: black;
+  left: 20px;
+  right: auto;
+  position: fixed;
+  top: 250px;
+  padding: 10px
+
+}
+
+.next {
+  background-color: #4CAF50;
+  color: white;
+  left: auto;
+  right: 20px;
+  position: fixed;
+  top: 250px;
+  padding: 10px
+}
+
+#overview {
+      position: fixed;
+      padding: 10px;
+      color: white;
+      background-color: #e91e63;
+      opacity: 0.8;
+      max-width: 450px;
+      margin-top: -150px;
+      text-align: center;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+}
+
+
+.jquery-modal.blocker {
+    padding-top: 150px;
+}
+
+#overview #testurl {
+    word-break: break-all;
+    color: #ffeb3b;
+    text-decoration: underline;
+}
+
+.modalurl {
+  color: #ffeb3b;
+}
+
+#status.complete {
+    background-color: #67f167;
+}
+
+#status.incomplete {
+    background-color: #ffc165;
+}
+
+#lg-spinner {
+    font-size: 60px;
+    color: #e69500;
+    padding: 15px
+}
+
+#sml-spinner {
+    font-size: 16px;
+    color: #e69500;
+    margin-left: 15px
+}
+
+
+#sml-tick {
+    font-size: 16px;
+    color: green;
+    margin-left: 10px
+}
+
+#lg-tick {
+    font-size: 60px;
+    color: green;
+    padding: 15px
+}
+
+#lgstatus {
+    font-size: 18px;
+}
+
+#platform {
+    text-transform: capitalize;
+}
+
+/* loading spinner */
+
+.loading {
+  border: 16px solid #e91e63; /* Pink */
+  border-top: 16px solid #ffeb3b; /* Yelllow */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+
+  transition-delay: 0.3s;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 250px;
+
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* loading spinner ends */
+
+  </style>
+
+<!--      HTML PAGE STYLING-->
+      <style>
+      td.container {
+            font-family: sans-serif;
+            font-size: 14px;
+            vertical-align: top;
+            display: block;
+            Margin: 0 auto;
+            padding-left: 80px;
+            max-width: 1920px;
+            padding-right: 80px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+       }
+
+       td.wrapper {
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+       }
+
+      </style>
+
+<!--      HTML PAGE STYLING ENDS-->
+
+<!--      FAILED URL TABLE STYLING -->
+<style>
+table#summary, table#summary td {
+    border: 1px solid #c6c6c6;
+    border-collapse: collapse;
+    padding: 5px;
+}
+
+table#summary {
+    margin-bottom: 30px;
+}
+</style>
+<!-- FAILED URL TABLE STYLING ENDS      -->
+
+<!--      BUTTON STYLING -->
+<style>
+    a.button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-decoration: none;
+
+}
+
+</style>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://kit.fontawesome.com/9dc40bb747.js"></script>
+
+ <!--      SLICK NAV JS AND CSS Starts-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/slicknav.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.min.js"></script>
+<style>
+
+a[role='menuitem'] { color: black; text-align: center }
+.slicknav_menu { background: #D2D2D2; }
+.slicknav_menu li { border-top: solid 1px; }
+.slicknav_menu li:last-child { border-bottom: solid 1px;}
+
+/* stretch menu to page width */
+
+html>body {
+    display: inline-block;
+}
+
+
+@media only screen and (min-width: 901px) {
+    html>body {
+    display: block;
+    }
+}
+
+
+
+</style>
+
+<script>
+	$(function(){
+		$('#menu').slicknav();
+	});
+</script>
+
+<!--      Slick Nav Ends-->
+
+<!--    Logo in nav -->
+    <style>
+        a#logo:after {
+            content: "📸 Get Screenshot 📸";
+            position:absolute;
+            font-family: sans-serif;
+            font-size:25px;
+            font-weight: 500;
+            color: #000000;
+            padding-left:20px;
+            top: 8px;
+            letter-spacing: -1px;
+        }
+    </style>
+<!--    End logo in nav-->
+
+
+
+
+
+  <script>
+  $(document).ready(function() {
+
+    console.log('page loaded')
+
+    // Store selected datasets here
+    // open modal and populate list of images to cycle through with only visible images
+    // update the stored modal image on click
+    $("a.screenshot").click(function(e) {
+        console.log('screenshot function click');
+        newUrl = e.target.dataset.modalSrc;
+        console.log(e.target.dataset.modalSrc);
+        // debugger;
+        imgElem = document.getElementById('modurl');
+        imgElem.onload = function() {
+            console.log("Loaded");
+            //document.getElementById('img-loader').classList.remove("loading");
+            removeLoader();
+            };
+        //document.getElementById('img-loader').classList.add("loading");
+        addLoader();
+        window.modalImg = $('#modurl').attr('src', newUrl)[0]; // set the image url in the modal
+
+        window.modalImgElem = e.target
+        createSrcList();
+
+        function createSrcList() {
+            var imgs = $('img[data-screenshot]');
+            var i;
+
+            window.srcs = [];
+            for (i = 0; i < imgs.length; i++) {
+                if (imgs[i].closest("td").style.display != "none") {
+                    srcs.push(imgs[i].dataset.modalSrc);
+                }
+            };
+
+            console.log("scrs list rebuilt");
+            //console.log("scrs: " + srcs);
+            console.log("click function: " + e)
+
+        };
+
+        // debugger;
+        populateOverview();
+        $.modal.defaults.clickClose = false;  // don't close modal when clicking off image
+        showHideNextPrevious();
+
+    }) // end of modal open onClick
+
+    window.refreshPending // create refreshPending global variable
+    $('#ex1').on($.modal.CLOSE, function(event, modal) {
+        if (window.refreshPending) {
+            refreshPage();
+        }
+    });
+
+        function addLoader() {
+            document.getElementById('img-loader').classList.add("loading");
+            console.log('loader added')
+        }
+
+        function removeLoader() {
+            document.getElementById('img-loader').classList.remove("loading");
+            console.log('loader removed')
+        }
+
+
+        function populateOverview() {
+            // use modal src to match data attributes from its corresponding thumb img
+            console.log('populate executed')
+            // debugger;
+
+            thumbData = $('img[data-modal-src="' + window.modalImg.src + '"]').data() // get data based on SRC. Data is stored against the corresponding thumb image (not the current image)
+            //currentImage = $('img[data-modal-src=modalImg.src]')[0]
+            console.log('thumb image data: ' + JSON.stringify(thumbData))
+
+            platform = (thumbData.modalPlatform) ? thumbData.modalPlatform : 'N/A'
+            os = (thumbData.modalOs) ? thumbData.modalOs : 'N/A'
+            testUrl = (thumbData.modalTesturl) ? thumbData.modalTesturl: 'N/A'
+            resultUrl = (thumbData.modalBsUrl) ? thumbData.modalBsUrl: 'N/A'
+
+
+            $('#platform').text(platform); // set the platform in the modal
+            $('#os').text(os); // set the os in the modal
+            $('#testurl').text(testUrl); // set the testURL in the modal
+            $('a#testurllink').attr('href', testUrl)[0]; // set the href for testUrl in the modal  // TODO TEST
+            $('a#resulturl').attr('href', resultUrl)[0]; // set the href for resultUrl in the modal
+
+            console.log(platform + " | " + os + " | " + testUrl)
+
+        }
+
+        // load specific image from email id
+
+        function openImageFromEmail() {
+            console.log('opening image from param: ' + document.location.search)
+            let params = new URLSearchParams(document.location.search);
+            let imageId = params.get("image_id");
+            if (imageId) {
+                let imageElement = document.getElementById(imageId);
+                if (imageElement) {
+                    window.deleteQueryString = true
+                    console.log('clicking element via param')
+                    imageElement.click();
+                } else {console.log('found image id query string but no corresponding element')}
+            } else { console.log('no image id query string')}
+
+        }
+
+
+        function showHideNextPrevious() {
+            let currentUrl = $('#modurl').attr('src'); // get current image url
+            console.log('current url: ' + currentUrl)
+
+            let imageIndex = srcs.indexOf(currentUrl);
+
+            // next
+            if (imageIndex + 1 >= srcs.length) {
+                //console.log('disable next')
+                $('a#next').hide();
+            } else {
+                // console.log('enable next')
+                $('a#next').show();
+            }
+
+            // previous
+            if (imageIndex < 1) {
+                // previous
+                // console.log('disable previous')
+                $('a#previous').hide();
+            } else {
+                // console.log('enable previous')
+                $('a#previous').show();
+            }
+
+            let nextIndex = srcs.indexOf(currentUrl) + 1;
+
+        }
+
+
+        window.refreshInterval  // create variable
+
+        function setRefreshPageInterval() {
+
+            if (!window.refreshInterval) {
+                window.refreshInterval = setInterval(decideRefresh, 15000);
+            }
+
+        }
+
+        function decideRefresh() {
+            complete = $('#lg-tick')
+            console.log('complete? ' + complete)
+            //debugger;
+            if (complete.length == 1) {
+                console.log('page complete - clear interval')
+                console.log('before: ' + window.refreshInterval)
+                clearInterval(window.refreshInterval)
+                console.log('after: ' + window.refreshInterval)
+
+            }
+            else {
+                if (!$.modal.isActive()) {
+                    console.log('modal not active refreshing page')
+                   refreshPage();
+                } else {
+                    console.log('modal active - refresh pending')
+                    window.refreshPending = true;
+                }
+            }
+        }
+
+        function refreshPage (){
+            console.log('hitting page refresh function')
+
+            if (window.deleteQueryString) {
+                document.location.search = ""  // strip query string TODO - remove '?' or only remove the specific param?
+                //document.location.search = "/"
+                console.log('window.deleteQueryString: ' + window.deleteQueryString)
+                window.deleteQueryString = false
+            } else {
+            location.reload()
+            //window.location.href = window.location;
+            console.log('interval straight after reload: ' + window.refreshInterval)
+            }
+
+        }
+
+
+    // click next/previous
+    // this function:
+    // updates the visible image
+    // calculates the next and previous urls
+    $('a#next, a#previous').click(function(e) {
+            // debugger;
+            console.log('click event fired')
+            targetId = e.target.id
+            console.log('target id: ' + targetId)
+
+            addLoader();
+            getNextPrevUrl(targetId)
+
+            function getNextPrevUrl(targetId) {
+                currentUrl = $('#modurl').attr('src'); // get current image url
+                console.log('current url: ' + currentUrl)
+
+                if (targetId == 'previous') {
+                    urlIndex = srcs.indexOf(currentUrl) - 1;
+                    console.log('previous index: ' + urlIndex)
+                } else if (targetId == 'next') {
+                    urlIndex = srcs.indexOf(currentUrl) + 1;
+                    console.log('next index: ' + urlIndex)
+                } else {
+                    throw "target id not found"
+                }
+
+                nextPrevUrl = srcs[urlIndex]  // get next url from identified index
+                console.log('next / prev: ' + nextPrevUrl);
+                $('#modurl').attr('src', nextPrevUrl); // apply next url to image src
+                $('div.jquery-modal.blocker.current').scrollTop(0);  // scroll back to top of modal
+            }
+
+             populateOverview();
+             showHideNextPrevious();
+        }
+
+    )
+
+       openImageFromEmail();  // Open modal if image_id found in query string
+
+       setRefreshPageInterval();
+
+}) // end of docReady
+    </script>
+
+
+
+
+
+  </head>
+  <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
+  <a id="logo" href="/"></a>
+    <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
+      <tr>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+        <td class="container" ignore="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; padding: 10px; max-width: 900px;">
+          <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; padding: 10px;">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">This is preheader text. Some clients will show this text as a preview.</span>
+            <table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; background: #ffffff; border-radius: 3px; width: 100%">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper" style="font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; /* padding: 20px; */">
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                    <tr>
+                      <td style="font-family: sans-serif; font-size: 14px; vertical-align: top; ">
+<!--                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">Hi there {{ email_part }}</p>-->
+                        <h3>Overview</h3>
+                        <ul style="padding-bottom: 20px;">
+                            <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Project ID: {{ timestampid }}</li>
+                            <li class="{% if project_complete %}{{ 'complete' }}{% else %}{{ 'pending' }}{% endif %}" style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">URLs complete: <span id="status">{{ current_number }}/{{ total_urls }}</span>{% if not project_complete %}<i id="sml-spinner" class="fa fa-spinner fa-pulse"></i>{% else %}<i id="sml-tick" class="far fa-check-circle"></i>{% endif %}</li>
+                           {% if results %}
+                            <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Project started: {{ results[0].modified | datetimeformat }} <a href="https://getscreenshot.herokuapp.com/static/london_baby.gif" target="_blank" style="font-family: sans-serif; font-size: 14px;">London, UK</a></li>
+                           <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Average time for each URL: {{ average_delta.minutes }}m {{ average_delta.seconds }}s</li>
+                           <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Mac resolution: {{ results[0].mac_res }} | Win resolution: {{ results[0].win_res }}</li>
+                           <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Device orientation: {{ results[0].orientation }}</li>
+                            <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Wait time per page: {{ results[0].wait_time }} seconds</li>
+                            {% else %}
+                            <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Project submitted: {{ summary.created_at| datetimeformat }} <a href="https://getscreenshot.herokuapp.com/static/london_baby.gif" target="_blank" style="font-family: sans-serif; font-size: 14px;">London, UK</a></li>
+                           <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">Average time for each URL: NA</li>
+                           {% endif %}
+
+<!--                           <li style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0;">View full results on <a href="">getscreenshot website</a></li>-->
+                        </ul>
+
+                          {% set details_button %}
+                           <a href="/details/{{ timestampid }}" class="button">View Job Details</a>
+                          {% endset %}
+
+                          {{ details_button }}
+
+
+                            {% if failed_urls and project_complete %}
+                          <div style="display: inline-block; text-align: left; width: 100%; padding-bottom:10px;">
+                              <br>
+                              <h3>Failed URLs</h3>
+                              <hr style="margin-bottom: 20px">
+                              <p>
+                                  The following URLs could not be completed - please try them again.
+                              </p>
+                                 <table id="summary">
+                                  <tr>
+                                      <th></th>
+                                      <th>URL</th>
+                                      <th>Status</th>
+                                  </tr>
+                                  {% for url in failed_urls %}
+                                  <tr>
+                                      <td>{{ loop.index }}</td>
+                                      <td>{{ url[0] }}</td>
+                                      <td>{{ url[1] }}</td>
+
+                                  </tr>
+                                  {% endfor %}
+                              </table>
+
+                           {% endif %}
+
+
+
+                        {% if results %}
+<!--                      script to insert filter checkboxes at the top of the page -->
+                        <h3 style="padding-top: 20px;">Filters</h3>
+                              <hr>
+                              <div style="padding-bottom: 20px; padding-top:10px;">
+                                    <strong>Operating System: </strong>
+                                {% for os in os_filter %}
+                                  <label class="checkbox-inline col-md-2 browser-group" for="{{ os | removespaces }}">
+                                      <input type="checkbox" name="{{ os | removespaces }}" id="{{ os | removespaces }}" value="1" checked {% if not project_complete %} disabled {% endif %}>{{ os|titlelabel }}
+                                  </label>
+                                {% endfor %}
+                                 </div>
+                             <div style="padding-bottom: 20px">
+                                    <strong>Browser: </strong>
+                                {% for browser in browser_filter %}
+                                  <label class="checkbox-inline col-md-2 browser-group" for="{{ browser | removespaces }}">
+                                      <input type="checkbox" name="{{ browser | removespaces }}" id="{{ browser | removespaces }}" value="1" checked {% if not project_complete %} disabled {% endif %}>
+                                      {{ browser|titlelabel  }}
+                                  </label>
+                                {% endfor %}
+                                 </div>
+
+                              {% if device_filter %}
+                                <div style="padding-bottom: 20px">
+                                    <strong>Device: </strong>
+                                {% for device in device_filter %}
+                                  <label class="checkbox-inline col-md-2 browser-group" for="{{ device | removespaces }}">
+                                      <input type="checkbox" name="{{ device | removespaces }}" id="{{ device | removespaces }}" value="1" checked {% if not project_complete %} disabled {% endif %}>{{device}}
+                                  </label>
+                                {% endfor %}
+                                 </div>
+                              {% endif %}
+
+                            {% if not project_complete %}
+                              <p>
+                                  <strong>NOTE: </strong>Filters will be enabled once GetScreenshot has finished processing all urls
+                              </p>
+                              {% endif %}
+
+
+
+<!--                         script to hide images based on checkboxes -->
+
+                            {% block javascript %}
+                                          <script>
+
+                                function updateCheckboxes(e) {
+                                        console.log("source click: " + e.target.id + " checked: " + e.target.checked)
+                                        currentId = e.target.id
+                                        hiddenPlatforms = new Set()
+                                        visiblePlatforms = new Set()
+                                        hiddenDevices = new Set()
+                                        visibleDevices = new Set()
+                                        hiddenOss = new Set()
+                                        visibleOss = new Set()
+
+                                        // compile sets of all visible and hidden items
+                                        $('#table-1 img').closest("td").each(function (index) {
+                                            if (this.style.display == "none") {
+                                                hiddenPlatform = $(this).find("img").data('platform')
+                                                hiddenPlatforms.add(hiddenPlatform)
+                                                hiddenDevice = $(this).find("img").data('device')
+                                                hiddenDevices.add(hiddenDevice)
+                                                hiddenOs = $(this).find("img").data('os')
+                                                hiddenOss.add(hiddenOs)
+                                            }
+                                            else {
+                                                visiblePlatform = $(this).find("img").data('platform')
+                                                visiblePlatforms.add(visiblePlatform)
+                                                visibleDevice = $(this).find("img").data('device')
+                                                visibleDevices.add(visibleDevice)
+                                                visibleOs = $(this).find("img").data('os')
+                                                visibleOss.add(visibleOs)
+                                            }
+                                        })
+
+                                        // console.log("hiddenPlatforms: " + Array.from(hiddenPlatforms))
+                                        // console.log("visiblePlatforms: " + Array.from(visiblePlatforms))
+
+                                        // console.log("hiddenDevices: " + Array.from(hiddenDevices))
+                                        // console.log("visibleDevices: " + Array.from(visibleDevices))
+
+                                        // console.log("hiddenOss: " + Array.from(hiddenOss))
+                                        // console.log("visibleOss: " + Array.from(visibleOss))
+
+
+                                        // if the item to be hidden does not appear in the list of visible platforms, uncheck the checkbox
+                                        if (e.target.checked == false) {
+                                            hiddenPlatforms.forEach(function (hiddenItem) {
+                                                if (!visiblePlatforms.has(hiddenItem)) {
+                                                    console.log('Platform unchecked: ' + hiddenItem)
+                                                    currentId != hiddenItem ? deselectCheckbox(hiddenItem) : null
+                                                    }
+                                            })
+
+                                            hiddenDevices.forEach(function (hiddenItem) {
+                                                if (!visibleDevices.has(hiddenItem)) {
+                                                        console.log('Device unchecked: ' + hiddenItem)
+                                                        currentId != hiddenItem ? deselectCheckbox(hiddenItem) :null
+                                                    }
+                                            })
+
+                                            hiddenOss.forEach(function (hiddenItem) {
+                                                if (!visibleOss.has(hiddenItem)) {
+                                                        console.log('OS unchecked: ' + hiddenItem)
+                                                        currentId != hiddenItem ? deselectCheckbox(hiddenItem) :null
+                                                    }
+                                            })
+                                            }
+
+                                        // if the item to be selected is visible on the page, check the checkbox
+                                        if (e.target.checked == true) {
+                                             visiblePlatforms.forEach(function (visibleItem) {
+                                                if (visiblePlatforms.has(visibleItem)) {
+                                                        console.log('Platform checked: ' + visibleItem)
+                                                       currentId != visibleItem ? selectCheckbox(visibleItem) : null
+                                                }
+                                            })
+
+                                            visibleDevices.forEach(function (visibleItem) {
+                                                if (visibleDevices.has(visibleItem)) {
+                                                        console.log('Device checked: ' + visibleItem)
+                                                        currentId != visibleItem ? selectCheckbox(visibleItem) :null
+
+                                                    }
+                                            })
+
+                                            visibleOss.forEach(function (visibleItem) {
+                                                if (visibleOss.has(visibleItem)) {
+                                                        console.log('OS checked: ' + visibleItem)
+                                                        currentId != visibleItem ? selectCheckbox(visibleItem) :null
+                                                    }
+                                            })
+                                        }
+                                }
+
+                                function selectCheckbox(elemId) {
+                                    if (elemId) {
+                                        checkbox = $("#" + elemId);
+                                        if (checkbox.prop('checked') == false) {
+                                            checkbox.prop('checked', true)
+                                        }
+                                    }
+                                }
+
+                                function deselectCheckbox(elemId) {
+                                    if (elemId) {
+                                        checkbox = $("#" + elemId);
+                                        if (checkbox.prop('checked') == true) {
+                                            checkbox.prop('checked', false)
+                                        }
+                                    }
+                                }
+
+
+
+                                {% for browser in browser_filter %}
+                                   $('#{{ browser | removespaces }}').change( function (e) {
+                                        // $('a>img[data-platform="{{ browser | removespaces }}"]').closest("td").toggle();
+                                        if (e.target.checked == true) {
+                                            $('a>img[data-platform="{{ browser | removespaces }}"]').closest("td").show()
+                                        } else {
+                                            $('a>img[data-platform="{{ browser | removespaces }}"]').closest("td").hide()
+                                        }
+                                        updateCheckboxes(e)
+                                    })
+                                {% endfor %}
+
+                                {% for device in device_filter %}
+                                   $('#{{ device | removespaces }}').change( function (e) {
+                                        // $('a>img[data-device="{{ device | removespaces }}"]').closest("td").toggle();
+                                        if (e.target.checked == true) {
+                                            $('a>img[data-device="{{ device | removespaces }}"]').closest("td").show()
+                                        } else {
+                                            $('a>img[data-device="{{ device | removespaces }}"]').closest("td").hide()
+                                        }
+                                        updateCheckboxes(e)
+                                   })
+                                {% endfor %}
+
+                                {% for os in os_filter %}
+                                   $('#{{ os | removespaces }}').change( function (e) {
+                                        // $('a>img[data-os="{{ os | removespaces }}"]').closest("td").toggle();
+                                        if (e.target.checked == true) {
+                                            $('a>img[data-os="{{ os | removespaces }}"]').closest("td").show();
+                                        } else {
+                                            $('a>img[data-os="{{ os | removespaces }}"]').closest("td").hide();
+                                        }
+                                        updateCheckboxes(e)
+                                   })
+                                {% endfor %}
+
+                            </script>
+                            {% endblock %}
+
+                               <h3 style="padding-top: 20px;">Test Results</h3>
+
+                        {% for url in results %}
+                        <hr>
+                          <div id="{{ url.job_id }}">
+                              <p>URL: <a href="{% if not url.test_url.startswith(('https', 'http')) %}{{ '//' + url.test_url }}{% else %}{{ url.test_url }}{% endif %}" target="_blank">{{ url.test_url }}</a><br />
+                                Result: <a href="{{ url.result_url }}" target="_blank">View on Browserstack</a><img style="width: 15px; padding-left: 3px" src="https://3fxtqy18kygf3on3bu39kh93-wpengine.netdna-ssl.com/wp-content/themes/browserstack/img/favicons/favicon.ico"><br/>
+                                Start time: {{ url.modified | timeformat }}
+                              </p>
+                          </div>
+<!--                          !! TABLE SPACING-->
+                        <table id="table-{{ loop.index }}" style="-webkit-border-horizontal-spacing: 15px;">
+                          <tr>
+                            {% for shot in url.screenshots %}
+                            <td width="140px" style=" padding: 10px;">
+                                {{ shot.browser|titlelabel }} {% if shot.browser_version %} ({{ shot.browser_version}}) {% endif %}<br />
+                              {{ shot.os|titlelabel }} ({{ shot.os_version }}) <br />
+                              {% if shot.device %}{{ shot.device }}{% endif %}<br />
+                                <a href="#ex1" rel="
+                                modal:open" class="screenshot">
+                                    <img loading="lazy" style="width: 100%; padding-top: 5px; border: solid 1px lightgrey;" id="{{ shot.id }}" data-os="{% if shot.os %}{{shot.os| removespaces }}{% endif %}" data-device="{% if shot.device %}{{ shot.device| removespaces }}{% endif %}" data-platform="{% if shot.browser %}{{ shot.browser| removespaces }}{% endif %}" data-screenshot="true" data-modal-os="{{ shot.os }} ({{ shot.os_version }}){% if shot.device %} {{ shot.device }}{% endif %}" data-modal-platform="{{ shot.browser }}{% if shot.browser_version %} ({{ shot.browser_version}}){% endif %}" data-modal-testurl="{{ url.test_url }}" data-modal-bs-url="{{ url.result_url }}" data-modal-src="{{ shot.image_url }}" src="{{ shot.thumb_url }}" />
+                                </a>
+                            </td>
+                            <!-- if divisible 3? insert new row -->
+                            {% if loop.index is divisibleby 5 or loop.last %}
+                              </tr>
+                            {% endif %}
+
+                          {% endfor %}
+
+
+                          </table>
+                        {% endfor %}
+
+                          {% endif %}
+
+                          <div style="display: inline-block; text-align: center; width: 100%; padding-bottom:10px;">
+                              <hr style="margin-bottom: 20px">
+                              <br />
+                              {{ details_button }}
+                              <br />
+                              <br />
+                              {% if not project_complete %}
+                              <i id="lg-spinner" class="fa fa-spinner fa-pulse"></i>
+                              {% else %}
+                              <i id="lg-tick" class="far fa-check-circle"></i>
+                              {% endif %}
+                              <div id="lgstatus">{{ current_number }}/{{ total_urls }} Complete</div>
+                          </div>
+
+
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+
+
+
+            <!-- Modal HTML embedded directly into document -->
+<div id="ex1" class="modal">
+  <div id="overview">
+      <div>URL: <a id="testurllink" href="#" target="_blank" class="modalurl"><span id="testurl" class="modalurl">NA</span></a></div>
+  <div>Browser: <span id="platform">NA</span></div>
+  <div>OS: <span id="os">NA</span></div>
+    <a id="resulturl" href="#" target="_blank" class="modalurl">Go to Browserstack</a>
+  </div>
+
+    <a href="#" id="previous" class="previous">&laquo; Prev</a>
+    <a href="#" id="next" class="next">Next &raquo;</a>
+
+<!--  src populated when modal opened... in theory -->
+<!--  <img id=modurl src="" />-->
+    <div id="img-loader"></div>
+    <img id="modurl" />
+  <a href="#" rel="modal:close">Close</a>
+</div>
+
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+        <td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+
+<!--  SLICK NAV MENU CONTENT-->
+  <div style="display:none">
+<ul id="menu">
+    <li><a href="/">New Job</a></li>
+	<li><a href="/all">All Jobs</a></li>
+	<li><a href="/queue">Queue Management</a></li>
+</ul>
+      </div>
+<!-- SLICK NAV MENU ENDS -->
+
+
+</html>
